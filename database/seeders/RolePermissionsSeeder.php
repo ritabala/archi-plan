@@ -26,9 +26,11 @@ class RolePermissionsSeeder extends Seeder
         ];
 
         foreach ($companies as $company) {
-            $roles['admin-' . $company->id] = 'Admin';
+            $roles['admin-' . $company->id] = 'Admin'; 
+            $roles['manager-' . $company->id] = 'Manager'; 
             $roles['staff-' . $company->id] = 'Staff';
-            $roles['member-' . $company->id] = 'Member'; 
+            $roles['client-' . $company->id] = 'Client';
+            $roles['collaborator-' . $company->id] = 'Collaborator';
         }
     
         // Define permissions with display names
@@ -40,8 +42,93 @@ class RolePermissionsSeeder extends Seeder
             // Dashboard
             'view_dashboard' => 'View Dashboard',
 
+            // Portfolios
+            'view_portfolios' => 'View Portfolios',
+            'view_portfolio_details' => 'View Portfolio Details',
+            'create_portfolio' => 'Create Portfolio',
+            'edit_portfolio' => 'Edit Portfolio',
+            'delete_portfolio' => 'Delete Portfolio',  
+            'share_with_client' => 'Share with Client',          
+
+            // Proposals
+            'view_proposal' => 'View Proposal',
+            'create_proposal' => 'Create Proposal',
+            'edit_proposal' => 'Edit Proposal',
+            'delete_proposal' => 'Delete Proposal',
+            'send_proposal_to_client' => 'Send Proposal to Client',
+            'approve_proposal' => 'Approve Proposal',
+            'reject_proposal' => 'Reject Proposal',
+            'comment_on_proposal' => 'Comment on Proposal',
+            'draft_proposal' => 'Draft Proposal',
+
+            // Clients
+            'view_clients' => 'View Clients',
+            'view_client_details' => 'View Client Details',
+            'create_client' => 'Create Client',
+            'edit_client' => 'Edit Client',
+            'delete_client' => 'Delete Client',
+            'assign_proposal' => 'Assign Proposal',
+
+            //projects
+            'manage_projects' => 'Manage Projects',
+            'view_projects' => 'View Projects',
+            'view_projects_details' => 'View Projects Details',
+            'create_projects' => 'Create Projects',
+            'edit_projects' => 'Edit Projects',
+            'delete_projects' => 'Delete Projects',
+
+            //tasks
+            'manage_tasks' => 'Manage Tasks',
+            'view_tasks' => 'View Tasks',
+            'view_tasks_details' => 'View Tasks Details',
+            'create_tasks' => 'Create Tasks',
+            'edit_tasks' => 'Edit Tasks',
+            'delete_tasks' => 'Delete Tasks',
+
+            //messages
+            'manage_messages' => 'Manage Messages',
+            'view_messages' => 'View Messages',
+            'view_messages_details' => 'View Messages Details',
+
+            //invoices
+            'view_invoices' => 'View Invoices',
+            'view_invoice_details' => 'View Invoice Details',
+            'create_invoices' => 'Create Invoices',
+            'edit_invoices' => 'Edit Invoices',
+            'delete_invoices' => 'Delete Invoices',
+            'send_invoice_to_client' => 'Send Invoice to Client',
+            'pay_invoice' => 'Pay Invoice',
+            'refund_invoice' => 'Refund Invoice',
+
+            //payments
+            'manage_payments' => 'Manage Payments',
+            'view_payments' => 'View Payments',
+            'view_payments_details' => 'View Payments Details',
+            'create_payments' => 'Create Payments',
+            'edit_payments' => 'Edit Payments',
+            'delete_payments' => 'Delete Payments',
+
+            //estimates
+            'manage_estimates' => 'Manage Estimates',
+            'view_estimates' => 'View Estimates',
+            'view_estimates_details' => 'View Estimates Details',
+            'create_estimates' => 'Create Estimates',
+            'edit_estimates' => 'Edit Estimates',
+            'delete_estimates' => 'Delete Estimates',
+
+            //contracts
+            'manage_contracts' => 'Manage Contracts',
+            'view_contracts' => 'View Contracts',
+            'view_contracts_details' => 'View Contracts Details',
+            'create_contracts' => 'Create Contracts',
+            'edit_contracts' => 'Edit Contracts',
+            'delete_contracts' => 'Delete Contracts',
+
             // Billing
             'manage_billing' => 'Manage Billing',
+            'manage_branding' => 'Manage Branding',
+            'manage_integrations' => 'Manage Integrations',
+            'manage_plan' => 'Manage Plan',
             'upgrade_plan' => 'Upgrade Plan',
             
         ];
@@ -74,16 +161,206 @@ class RolePermissionsSeeder extends Seeder
             if ($displayName === 'Admin') {
                 $role->syncPermissions(array_keys($permissions));
             }
+
+            // Grant permissions to Manager
+            if ($displayName === 'Manager') {
+                $role->syncPermissions([
+                    // Manage Roles and Permissions
+                    'manage_roles',
+                    'manage_permissions',
+
+                    // Dashboard
+                    'view_dashboard',
+
+                    // Portfolios  (assigned to manager)
+                    'view_portfolios', 
+                    'view_portfolio_details', 
+                    'create_portfolio', 
+                    'edit_portfolio', 
+                    'delete_portfolio', 
+                    'share_with_client', 
+
+                    // Proposals  (assigned to manager)
+                    'view_proposal', 
+                    'create_proposal', 
+                    'edit_proposal', 
+                    'delete_proposal', 
+                    'send_proposal_to_client', 
+                    'approve_proposal', 
+                    'reject_proposal', 
+                    'comment_on_proposal', 
+                    'draft_proposal',
+                    
+                    // Clients  (assigned to manager)
+                    'view_clients',   
+                    'view_client_details', 
+                    'create_client', 
+                    'edit_client', 
+                    'delete_client', 
+                    'assign_proposal', 
+
+                    // Projects  (assigned to manager)
+                    'manage_projects', 
+                    'view_projects', 
+                    'view_projects_details', 
+                    'create_projects', 
+                    'edit_projects', 
+                    'delete_projects', 
+
+                    // Tasks  (assigned to manager)
+                    'manage_tasks', 
+                    'view_tasks', 
+                    'view_tasks_details', 
+                    'create_tasks', 
+                    'edit_tasks', 
+                    'delete_tasks', 
+
+                    // Messages
+                    'manage_messages',
+                    'view_messages',
+                    'view_messages_details',
+
+                    // Invoices  (assigned to manager)
+                    'view_invoices', 
+                    'view_invoice_details', 
+                    'create_invoices', 
+                    'edit_invoices', 
+                    'delete_invoices', 
+                    'send_invoice_to_client', 
+                    'pay_invoice', 
+                    'refund_invoice', 
+
+                    // Payments  (assigned to manager)
+                    'manage_payments', 
+                    'view_payments', 
+                    'view_payments_details', 
+                    'create_payments', 
+                    'edit_payments', 
+                    'delete_payments',
+
+                    // Estimates  (assigned to manager)
+                    'manage_estimates', 
+                    'view_estimates', 
+                    'view_estimates_details', 
+                    'create_estimates', 
+                    'edit_estimates', 
+                    'delete_estimates', 
+
+                    // Contracts (assigned to manager)
+                    'manage_contracts',  
+                    'view_contracts', 
+                    'view_contracts_details', 
+                    'create_contracts', 
+                    'edit_contracts', 
+                    'delete_contracts', 
+
+                ]);
+            }
     
             // Staff gets some permissions
             if ($displayName === 'Staff') {
                 $role->syncPermissions([
+                    // Dashboard
                     'view_dashboard',
-                    'manage_billing'
+
+                    // Portfolios
+                    'view_portfolios',
+                    'view_portfolio_details',
+                    'share_with_client',          
+
+                    // Proposals
+                    'view_proposal',
+                    'send_proposal_to_client',
+                    'comment_on_proposal',
+                    'draft_proposal',
+
+                    // Projects
+                    'view_projects', // assigned to staff
+                    'view_projects_details', // assigned to staff
+
+                    // Tasks
+                    'manage_tasks',
+                    'view_tasks', // assigned to staff
+                    'view_tasks_details', // assigned to staff
+                    'create_tasks',
+                    'edit_tasks',
+                    'delete_tasks',
+
+                    // Messages
+                    'manage_messages',
+                    'view_messages', // assigned to staff
+                    'view_messages_details', // assigned to staff
+
                 ]);
             }
     
-            // Member role usually has no permissions by default
+            // Grant permissions to Client
+            if ($displayName === 'Client') {
+                $role->syncPermissions([
+                    // Dashboard
+                    'view_dashboard',
+
+                    // Portfolios  (shared with client)
+                    'view_portfolios', 
+                    'view_portfolio_details', 
+
+                    // Proposals  (own proposals)
+                    'view_proposal', 
+                    'approve_proposal', 
+                    'reject_proposal', 
+                    'comment_on_proposal', 
+
+                    // Messages (own messages)
+                    'manage_messages',
+                    'view_messages',
+                    'view_messages_details',
+
+                    // Invoices  (own invoices)
+                    'view_invoices', 
+                    'view_invoice_details', 
+                    'pay_invoice', 
+
+                    // Payments  (own payments)
+                    'view_payments', 
+
+                    // Estimates  (own estimates)
+                    'view_estimates', 
+
+                    // Contracts (own contracts)
+                    'view_contracts', 
+
+                ]);
+            }
+
+            // Grant permissions to Collaborator
+            if ($displayName === 'Collaborator') {
+                $role->syncPermissions([
+                    // Dashboard
+                    'view_dashboard',
+
+                    // Portfolios
+                    'view_portfolios',
+                    'view_portfolio_details',        
+                    
+                    // Projects
+                    'view_projects', // assigned to collaborator
+                    'view_projects_details', // assigned to collaborator
+
+                    // Tasks
+                    'manage_tasks',
+                    'view_tasks', // assigned to collaborator
+                    'view_tasks_details', // assigned to collaborator
+                    'create_tasks',
+                    'edit_tasks',
+                    'delete_tasks',
+
+                    // Messages
+                    'manage_messages',
+                    'view_messages', // assigned to collaborator
+                    'view_messages_details', // assigned to collaborator
+
+                ]);
+            }
         }
 
         // Check and create users only if they do not already exist
@@ -91,6 +368,10 @@ class RolePermissionsSeeder extends Seeder
 
         foreach ($companies as $company) {
             $this->createUserWithRole('admin-' . $company->id . '@example.com', 'admin-' . $company->id, 'admin-' . $company->id, $company->id);
+            $this->createUserWithRole('manager-' . $company->id . '@example.com', 'manager-' . $company->id, 'manager-' . $company->id, $company->id);
+            $this->createUserWithRole('staff-' . $company->id . '@example.com', 'staff-' . $company->id, 'staff-' . $company->id, $company->id);
+            $this->createUserWithRole('client-' . $company->id . '@example.com', 'client-' . $company->id, 'client-' . $company->id, $company->id);
+            $this->createUserWithRole('collaborator-' . $company->id . '@example.com', 'collaborator-' . $company->id, 'collaborator-' . $company->id, $company->id);
         }
     }
 
