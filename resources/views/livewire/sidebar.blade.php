@@ -26,8 +26,8 @@
                                 href="{{ route($item['route']) }}"
                                 @class([
                                     'group flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium',
-                                    'text-gray-700 hover:bg-gray-100 hover:text-gray-900' => ! request()->routeIs($item['route']),
-                                    'bg-gray-100 text-gray-900' => request()->routeIs($item['route'])
+                                    'text-gray-700 hover:bg-gray-100 hover:text-gray-900' => ! (request()->routeIs($item['route']) || request()->routeIs($item['route'] . '.*')),
+                                    'bg-gray-100 text-gray-900' => request()->routeIs($item['route']) || request()->routeIs($item['route'] . '.*')
                                 ])
                             >
                                 <span class="size-5 grid place-items-center">
@@ -43,8 +43,16 @@
                             </a>
                         </li>
                     @elseif ($item['type'] === 'group')
-                        @php $groupKey = $item['key']; @endphp
-                        <li x-data="{ expandedLocal: expanded['{{ $groupKey }}'] ?? false }" x-init="$watch('expandedLocal', v => expanded['{{ $groupKey }}'] = v)">
+                        @php 
+                            $groupKey = $item['key']; 
+                            $isGroupActive = collect($item['children'] ?? [])->contains(function ($child) {
+                                return request()->routeIs($child['route']) || request()->routeIs($child['route'] . '.*');
+                            });
+                        @endphp
+                        <li x-data="{ expandedLocal: @js($isGroupActive) }" x-init="
+                                expanded['{{ $groupKey }}'] = expandedLocal;
+                                $watch('expandedLocal', v => expanded['{{ $groupKey }}'] = v)
+                            ">
                             <button
                                 type="button"
                                 class="w-full flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
@@ -58,14 +66,14 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                 </svg>
                             </button>
-                            <div x-show="expandedLocal" x-collapse class="ms-9 mt-1 space-y-1">
+                            <div x-show="expandedLocal" x-collapse.duration.0ms x-cloak class="ms-9 mt-1 space-y-1">
                                 @foreach ($item['children'] as $child)
                                     <a
                                         href="{{ route($child['route']) }}"
                                         @class([
                                             'block rounded-md px-3 py-2 text-sm',
-                                            'text-gray-600 hover:bg-gray-100 hover:text-gray-900' => ! request()->routeIs($child['route']),
-                                            'bg-gray-100 text-gray-900' => request()->routeIs($child['route'])
+                                            'text-gray-600 hover:bg-gray-100 hover:text-gray-900' => ! (request()->routeIs($child['route']) || request()->routeIs($child['route'] . '.*')),
+                                            'bg-gray-100 text-gray-900' => request()->routeIs($child['route']) || request()->routeIs($child['route'] . '.*')
                                         ])
                                     >
                                         {{ $child['name'] }}
