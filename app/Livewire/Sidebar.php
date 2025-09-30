@@ -80,12 +80,6 @@ class Sidebar extends Component
                         'icon' => null,
                         'route' => 'portfolios.index',
                     ],
-                    // [
-                    //     'type' => 'link',
-                    //     'name' => 'Categories',
-                    //     'icon' => null,
-                    //     'route' => 'portfolios.categories',
-                    // ],
                     [
                         'type' => 'link',
                         'name' => 'Add New',
@@ -112,12 +106,20 @@ class Sidebar extends Component
             //     'icon' => '💰',
             //     'route' => 'invoices.index',
             // ],
-            // [
-            //     'type' => 'link',
-            //     'name' => 'Settings',
-            //     'icon' => '⚙️',
-            //     'route' => 'settings',
-            // ],
+            [
+                'type' => 'group',
+                'key' => 'settings',
+                'name' => 'Settings',
+                'icon' => '🖼️',
+                'children' => [
+                    [
+                        'type' => 'link',
+                        'name' => 'Portfolio Categories',
+                        'icon' => null,
+                        'route' => 'portfolios.index',
+                    ],
+                ],
+            ],
         ];
     }
 

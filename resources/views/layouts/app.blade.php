@@ -36,7 +36,7 @@
             <div class="relative">
                 <livewire:sidebar />
                 <main class="md:ms-64">
-                    {{ $slot }}
+                    @yield('content')
                 </main>
             </div>
         </div>
