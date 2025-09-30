@@ -45,7 +45,7 @@
                                         <div class="text-lg font-semibold text-gray-900">@yield('title', $pageTitle ?? 'Dashboard')</div>
                                     @endif
                                     <div class="text-sm text-gray-500">
-                                        @yield('breadcrumbs')
+                                        <x-breadcrumbs />
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                             <div class="text-md font-semibold text-gray-900">@yield('title', $pageTitle ?? 'Dashboard')</div>
                         @endif
                         <div class="text-sm text-gray-500">
-                            @yield('breadcrumbs')
+                            <x-breadcrumbs />
                         </div>
                     </div>
                 </header>
