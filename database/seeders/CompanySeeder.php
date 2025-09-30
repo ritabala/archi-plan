@@ -15,7 +15,7 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-        $companies = [
+        $firms = [
             'Apex Design Group',
             'Canvas Creations',
             'Urban Escapes Studio',
@@ -24,13 +24,13 @@ class CompanySeeder extends Seeder
             'Horizon Design Company'
         ];
 
-        foreach ($companies as $company) { 
-            $companyName = $company;
-            $companySlug = Str::slug($companyName) . '-' . Str::random(5);
+        foreach ($firms as $firm) { 
+            $firmName = $firm;
+            $firmSlug = Str::slug($firmName) . '-' . Str::random(5);
 
             Company::create([
-                'slug' => $companySlug,
-                'name' => $companyName,
+                'slug' => $firmSlug,
+                'name' => $firmName,
                 'address' => fake()->address(),
                 'phone' => fake()->phoneNumber(),
                 'email' => fake()->email(),

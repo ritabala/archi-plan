@@ -32,10 +32,13 @@
                 </header>
             @endif
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <!-- Page Content with Sidebar -->
+            <div class="relative">
+                <livewire:sidebar />
+                <main class="md:ms-64">
+                    {{ $slot }}
+                </main>
+            </div>
         </div>
 
         @stack('modals')

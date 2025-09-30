@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Company extends Model
+class Firm extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -25,7 +25,7 @@ class Company extends Model
     ];
 
     /**
-     * Get the users for the company.
+     * Get the users for the firm.
      */
     public function users(): HasMany
     {

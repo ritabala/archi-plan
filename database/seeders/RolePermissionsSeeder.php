@@ -19,18 +19,18 @@ class RolePermissionsSeeder extends Seeder
      */
     public function run(): void
     {
-        $companies = Company::all();
+        $firms = Company::all();
         // Define roles with their display names
         $roles = [
             'super-admin' => 'Super Admin',
         ];
 
-        foreach ($companies as $company) {
-            $roles['admin-' . $company->id] = 'Admin'; 
-            $roles['manager-' . $company->id] = 'Manager'; 
-            $roles['staff-' . $company->id] = 'Staff';
-            $roles['client-' . $company->id] = 'Client';
-            $roles['collaborator-' . $company->id] = 'Collaborator';
+        foreach ($firms as $firm) {
+            $roles['admin-' . $firm->id] = 'Admin'; 
+            $roles['manager-' . $firm->id] = 'Manager'; 
+            $roles['staff-' . $firm->id] = 'Staff';
+            $roles['client-' . $firm->id] = 'Client';
+            $roles['collaborator-' . $firm->id] = 'Collaborator';
         }
     
         // Define permissions with display names
@@ -134,10 +134,10 @@ class RolePermissionsSeeder extends Seeder
         ];
 
         // Add super-admin permissions
-        $companyPermissions = self::getSuperAdminPermissions();
+        $firmPermissions = self::getSuperAdminPermissions();
     
         // Create permissions if they don't exist
-        foreach (array_merge($permissions, $companyPermissions) as $name => $displayName) {
+        foreach (array_merge($permissions, $firmPermissions) as $name => $displayName) {
             Permission::firstOrCreate([
                 'name' => $name,
                 'display_name' => $displayName
@@ -366,19 +366,19 @@ class RolePermissionsSeeder extends Seeder
         // Check and create users only if they do not already exist
         $this->createUserWithRole('super-admin@example.com', 'Super Admin', 'super-admin');
 
-        foreach ($companies as $company) {
-            $this->createUserWithRole('admin-' . $company->id . '@example.com', 'admin-' . $company->id, 'admin-' . $company->id, $company->id);
-            $this->createUserWithRole('manager-' . $company->id . '@example.com', 'manager-' . $company->id, 'manager-' . $company->id, $company->id);
-            $this->createUserWithRole('staff-' . $company->id . '@example.com', 'staff-' . $company->id, 'staff-' . $company->id, $company->id);
-            $this->createUserWithRole('client-' . $company->id . '@example.com', 'client-' . $company->id, 'client-' . $company->id, $company->id);
-            $this->createUserWithRole('collaborator-' . $company->id . '@example.com', 'collaborator-' . $company->id, 'collaborator-' . $company->id, $company->id);
+        foreach ($firms as $firm) {
+            $this->createUserWithRole('admin-' . $firm->id . '@example.com', 'admin-' . $firm->id, 'admin-' . $firm->id, $firm->id);
+            $this->createUserWithRole('manager-' . $firm->id . '@example.com', 'manager-' . $firm->id, 'manager-' . $firm->id, $firm->id);
+            $this->createUserWithRole('staff-' . $firm->id . '@example.com', 'staff-' . $firm->id, 'staff-' . $firm->id, $firm->id);
+            $this->createUserWithRole('client-' . $firm->id . '@example.com', 'client-' . $firm->id, 'client-' . $firm->id, $firm->id);
+            $this->createUserWithRole('collaborator-' . $firm->id . '@example.com', 'collaborator-' . $firm->id, 'collaborator-' . $firm->id, $firm->id);
         }
     }
 
     /**
      * Helper function to create a user and assign a role if the user does not exist.
      */
-    private function createUserWithRole($email, $name, $roleName, $companyId = null)
+    private function createUserWithRole($email, $name, $roleName, $firmId = null)
     {
         // Debugging output to see if the user exists before insertion
         $existingUser = User::where('email', $email)->first();
@@ -388,7 +388,7 @@ class RolePermissionsSeeder extends Seeder
         } else {
             // If user does not exist, create the user
             $user = User::create([
-                'company_id' => ($roleName == 'super-admin') ? null : $companyId,
+                'firm_id' => ($roleName == 'super-admin') ? null : $firmId,
                 'name' => $name,
                 'email' => $email,
                 'password' => bcrypt('password@123'),
