@@ -80,12 +80,12 @@ class Sidebar extends Component
                         'icon' => null,
                         'route' => 'portfolios.index',
                     ],
-                    [
-                        'type' => 'link',
-                        'name' => 'Categories',
-                        'icon' => null,
-                        'route' => 'portfolios.categories',
-                    ],
+                    // [
+                    //     'type' => 'link',
+                    //     'name' => 'Categories',
+                    //     'icon' => null,
+                    //     'route' => 'portfolios.categories',
+                    // ],
                     [
                         'type' => 'link',
                         'name' => 'Add New',

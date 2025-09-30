@@ -13,13 +13,13 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([            
             //Global seeders irrespective of the environment     
-            CompanySeeder::class,
+            FirmSeeder::class,
             RolePermissionsSeeder::class,
         ]);
 
         if (app()->environment('local') || app()->environment('demo')) {
             $this->call([
-                CompanySeeder::class,
+                FirmSeeder::class,
                 RolePermissionsSeeder::class,
             ]);
         }

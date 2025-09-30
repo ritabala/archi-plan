@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use App\Traits\SuperAdminPermissions;
-use App\Models\Company;
+use App\Models\Firm;
 
 class RolePermissionsSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class RolePermissionsSeeder extends Seeder
      */
     public function run(): void
     {
-        $firms = Company::all();
+        $firms = Firm::all();
         // Define roles with their display names
         $roles = [
             'super-admin' => 'Super Admin',
@@ -43,7 +43,7 @@ class RolePermissionsSeeder extends Seeder
             'view_dashboard' => 'View Dashboard',
 
             // Portfolios
-            'view_portfolios' => 'View Portfolios',
+            'view_portfolio' => 'View Portfolio',
             'view_portfolio_details' => 'View Portfolio Details',
             'create_portfolio' => 'Create Portfolio',
             'edit_portfolio' => 'Edit Portfolio',
@@ -173,7 +173,7 @@ class RolePermissionsSeeder extends Seeder
                     'view_dashboard',
 
                     // Portfolios  (assigned to manager)
-                    'view_portfolios', 
+                    'view_portfolio', 
                     'view_portfolio_details', 
                     'create_portfolio', 
                     'edit_portfolio', 
@@ -264,7 +264,7 @@ class RolePermissionsSeeder extends Seeder
                     'view_dashboard',
 
                     // Portfolios
-                    'view_portfolios',
+                    'view_portfolio',
                     'view_portfolio_details',
                     'share_with_client',          
 
@@ -301,7 +301,7 @@ class RolePermissionsSeeder extends Seeder
                     'view_dashboard',
 
                     // Portfolios  (shared with client)
-                    'view_portfolios', 
+                    'view_portfolio', 
                     'view_portfolio_details', 
 
                     // Proposals  (own proposals)
@@ -339,7 +339,7 @@ class RolePermissionsSeeder extends Seeder
                     'view_dashboard',
 
                     // Portfolios
-                    'view_portfolios',
+                    'view_portfolio',
                     'view_portfolio_details',        
                     
                     // Projects

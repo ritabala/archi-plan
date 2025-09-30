@@ -5,10 +5,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-use App\Models\Company;
+use App\Models\Firm;
 use Illuminate\Support\Str;
 
-class CompanySeeder extends Seeder
+class FirmSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -28,7 +28,7 @@ class CompanySeeder extends Seeder
             $firmName = $firm;
             $firmSlug = Str::slug($firmName) . '-' . Str::random(5);
 
-            Company::create([
+            Firm::create([
                 'slug' => $firmSlug,
                 'name' => $firmName,
                 'address' => fake()->address(),

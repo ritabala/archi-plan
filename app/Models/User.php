@@ -68,11 +68,13 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Get the company that the user belongs to.
-     */
-    public function company()
+    public function firm()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Firm::class);
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->hasRole('super-admin');
     }
 }
