@@ -21,22 +21,59 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+            <!-- Off-canvas + fixed sidebar -->
+            <livewire:sidebar />
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+            <!-- Right column -->
+            <div class="md:ms-64">
+                <!-- Top Header: nav + breadcrumbs + account dropdown -->
+                <header class="sticky top-0 z-20 bg-white/80 backdrop-blur border-b border-gray-200">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex items-center justify-between h-16">
+                            <div class="flex items-center gap-3">
+                                <!-- Mobile open sidebar button -->
+                                <button type="button" class="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100" x-data @click="$dispatch('open-sidebar')">
+                                    <svg class="size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+                                    </svg>
+                                </button>
+                                <!-- Page title / breadcrumbs slot -->
+                                <div class="hidden sm:flex flex-col">
+                                    @if (isset($header))
+                                        <div class="text-lg font-semibold text-gray-900">{{ $header }}</div>
+                                    @else
+                                        <div class="text-lg font-semibold text-gray-900">@yield('title', $pageTitle ?? 'Dashboard')</div>
+                                    @endif
+                                    <div class="text-sm text-gray-500">
+                                        @yield('breadcrumbs')
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Account dropdown and team switcher from Jetstream -->
+                            <div class="sm:flex">
+                                @include('navigation-menu')
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Compact mobile account nav -->
+                    <div class="sm:hidden border-t border-gray-100 px-6 py-2">
+                        {{-- @include('navigation-menu') --}}
+                        @if (isset($header))
+                            <div class="text-md font-semibold text-gray-900">{{ $header }}</div>
+                        @else
+                            <div class="text-md font-semibold text-gray-900">@yield('title', $pageTitle ?? 'Dashboard')</div>
+                        @endif
+                        <div class="text-sm text-gray-500">
+                            @yield('breadcrumbs')
+                        </div>
                     </div>
                 </header>
-            @endif
 
-            <!-- Page Content with Sidebar -->
-            <div class="relative">
-                <livewire:sidebar />
-                <main class="md:ms-64">
-                    @yield('content')
+                <!-- Main content -->
+                <main class="py-6">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        @yield('content')
+                    </div>
                 </main>
             </div>
         </div>
