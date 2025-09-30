@@ -43,7 +43,7 @@ return [
                 'type' => 'link',
                 'name' => 'Portfolio Categories',
                 'icon' => null,
-                'route' => 'portfolio.index',
+                'route' => 'portfolio.category',
             ],
         ],
     ],

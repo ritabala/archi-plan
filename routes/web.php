@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\PortfolioCategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,4 +20,6 @@ Route::middleware([
 
     Route::resource('proposal', ProposalController::class);
     Route::resource('portfolio', PortfolioController::class);
+
+    Route::get('settings/portfolio-category', [PortfolioCategoryController::class, 'index'])->name('portfolio.category');
 });

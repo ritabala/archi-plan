@@ -7,8 +7,8 @@
 @section('content')
     <div class="py-4">
         <div class="max-w-full mx-auto sm:px-6 lg:px-8">
-            {{-- @livewire('membership.membership-management') --}}
             Proposals content goes here
+            @livewire('proposal.proposal-list')
         </div>
     </div>
 @endsection
