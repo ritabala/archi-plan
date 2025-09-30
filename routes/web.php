@@ -17,6 +17,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::resource('proposals', ProposalController::class);
-    Route::resource('portfolios', PortfolioController::class);
+    Route::resource('proposal', ProposalController::class);
+    Route::resource('portfolio', PortfolioController::class);
 });
